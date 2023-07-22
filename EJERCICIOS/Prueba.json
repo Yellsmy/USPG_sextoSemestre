@@ -1,0 +1,13 @@
+{
+     "jugadores": [
+          {
+               "nombre": "Prueba",
+               "Contraseña": "123",
+               "nacionalidad": "Guatemalteca",
+               "apodo": "Prueba1",
+               "edad": "24",
+               "estado": "Inactiva",
+               "Total_Puntos": "0"
+          }
+     ]
+}

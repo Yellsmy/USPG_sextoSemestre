@@ -1,0 +1,17 @@
+{
+     "jugadores": [
+          {
+               "nombre": "Prueba",
+               "nacionalidad": "Guatemalteca",
+               "apodo": "Prueba1",
+               "edad": "24",
+               "estado": "Inactiva"
+          }
+     ],
+     "Historial": [
+          {
+               "Apodo": "Lily",
+               "Avatar_Usado": "AvatarPrueba"
+          }
+     ]
+}

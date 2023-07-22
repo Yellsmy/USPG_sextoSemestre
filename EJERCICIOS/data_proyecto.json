@@ -1,0 +1,22 @@
+{
+    "clientes": [
+        {
+            "first_name": "sigrid",
+            "last_name": "paz",
+            "pin": 2727,
+            "saldo": 7.17
+        },
+        {
+            "first_name": "Jose",
+            "last_name": "Pereira",
+            "pin": 31,
+            "saldo": 5.5
+        },
+        {
+            "first_name": "Luis",
+            "last_name": "Rivera",
+            "pin": 36,
+            "saldo": 1.11
+        }
+    ]
+}

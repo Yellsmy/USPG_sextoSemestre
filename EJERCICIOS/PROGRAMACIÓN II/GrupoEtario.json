@@ -1,0 +1,39 @@
+{
+    "Grupos": [
+        {
+            "Fase": "1",
+            "GrupoEtario": "Tercera edad",
+            "EdadInicio": "60",
+            "EdadFinal": "150",
+            "FechaInicio": "2021-3-1"
+        },
+        {
+            "Fase": "2",
+            "GrupoEtario": "Adultos",
+            "EdadInicio": "40",
+            "EdadFinal": "59",
+            "FechaInicio": "2021-5-31"
+        },
+        {
+            "Fase": "3",
+            "GrupoEtario": "Jóvenes",
+            "EdadInicio": "19",
+            "EdadFinal": "39",
+            "FechaInicio": "2021-7-15"
+        },
+        {
+            "Fase": "4",
+            "GrupoEtario": "Adolecentes",
+            "EdadInicio": "12",
+            "EdadFinal": "18",
+            "FechaInicio": "2021-9-15"
+        },
+        {
+            "Fase": "5",
+            "GrupoEtario": "Niños",
+            "EdadInicio": "5",
+            "EdadFinal": "11",
+            "FechaInicio": "2022-2-1"
+        }
+    ]
+}

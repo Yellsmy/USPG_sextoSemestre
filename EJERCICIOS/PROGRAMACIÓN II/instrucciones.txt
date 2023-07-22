@@ -1,0 +1,18 @@
+Crear un programa codificado en POO en Phyton para el registro de personas a vacunarse de COVID-19 con los siguientes requerimientos:
+
+
+- La vacunación se da por fases, cada fase está dirigida a diferentes grupos etarios. (Un grupo etario está determinado por un rango de edad.)
+- Cada fase se programa con diferentes fechas de inicio de vacunación.
+- El programa debe detectar el grupo etario al que pertenece la persona según su edad al momento de registrarse y darle una fecha de vacunación. La fecha se determinará de forma aleatoria pero tiene que ser posterior a la fecha de inicio de ese grupo etario.
+- Los datos a registrar son: Nombres, apellidos, fecha nacimiento, sexo(M,F), correo electrónico, teléfono, padece enfermedad congénita(S,N), padece enfermedad autoinmune(S,N), Dosis(1,2)
+- Para el cálculo de la edad, tome la fecha 30/11/2021.
+- El programa debe validar el tipo de dato que ingresa el paciente.
+- Los grupos etarios están definidos en un archivo JSON. El programa debe leer del archivo los diferentes grupos etarios para poder dar la fecha adecuada.
+
+
+
+
+Incluir en la codificación:
+- Herencia
+- Polimorfismo
+- Encapsulamiento

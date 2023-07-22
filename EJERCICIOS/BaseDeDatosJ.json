@@ -1,0 +1,82 @@
+{
+      "jugadores": [
+            {
+                  "nombre": "Prueba",
+                  "clave": "120",
+                  "nacionalidad": "Guatemalteca",
+                  "apodo": "Prueba1",
+                  "edad": "24",
+                  "estado": "Inactiva",
+                  "Total_Puntos": "0"
+            },
+            {
+                  "nombre": "Marie",
+                  "clave": "111",
+                  "nacionalidad": "Guatemalteca",
+                  "apodo": "M15",
+                  "edad": 15,
+                  "estado": "Activa",
+                  "Puntos Totales": 0
+            },
+            {
+                  "nombre": "Mario Leiva",
+                  "clave": "333",
+                  "nacionalidad": "Guatemalteca",
+                  "apodo": "MarioBross",
+                  "edad": 12,
+                  "estado": "Activa",
+                  "Puntos Totales": 0
+            },
+            {
+                  "nombre": "Amanda",
+                  "clave": "456",
+                  "nacionalidad": "Guatemalteca",
+                  "apodo": "Amanda1",
+                  "edad": 20,
+                  "estado": "Activa",
+                  "Puntos Totales": 0
+            },
+            {
+                  "nombre": "Gema",
+                  "clave": "001",
+                  "nacionalidad": "Guatemalteca",
+                  "apodo": "Gema01",
+                  "edad": 30,
+                  "estado": "Activa",
+                  "Puntos Totales": 0
+            },
+            {
+                  "nombre": "Gustavo",
+                  "clave": "ppp",
+                  "nacionalidad": "Guatemalteca",
+                  "apodo": "MR28",
+                  "edad": 100,
+                  "estado": "Activa",
+                  "Puntos Totales": 0
+            },
+            {
+                  "nombre": "Lucrecia",
+                  "clave": "444",
+                  "nacionalidad": "Guatemalteca",
+                  "apodo": "luky",
+                  "edad": 50,
+                  "estado": "Activa",
+                  "Puntos Totales": 0
+            },
+            {
+                  "nombre": "Ruby",
+                  "clave": "0000",
+                  "nacionalidad": "Guatemalteca",
+                  "apodo": "MR28",
+                  "edad": 28,
+                  "estado": "Activa",
+                  "Puntos Totales": 0
+            }
+      ],
+      "Historial": [
+            {
+                  "Apodo": "Lily",
+                  "Avatar_Usado": "AvatarPrueba"
+            }
+      ]
+}
