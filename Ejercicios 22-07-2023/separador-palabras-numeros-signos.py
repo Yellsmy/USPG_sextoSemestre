@@ -1,6 +1,7 @@
 #Pragrama que nos devuelve el conteo de numero de lineas de un archivo y las palabras, numeros y simbolos especiales.
 #Realizado Lilibeth Garcia y Roberto Castillo
 import string
+import re
 
 def contar_lineas_palabras_numeros_signos(contenido):
     palabras = []
@@ -9,10 +10,16 @@ def contar_lineas_palabras_numeros_signos(contenido):
 
     lineas = contenido.count('\n') + 1
 
+    # Expresión regular para detectar números enteros y decimales
+    regex_numero = r"[-+]?\d*\.\d+|\d+"
+
     for palabra in contenido.split():
         palabra_limpia = palabra.strip(string.punctuation)
-        if palabra_limpia.isnumeric():
-            numeros.append(palabra_limpia)
+        if re.match(regex_numero, palabra_limpia):
+            if '.' in palabra_limpia:  # Verificar si es decimal
+                numeros.append(float(palabra_limpia))
+            else:
+                numeros.append(int(palabra_limpia))
         elif palabra_limpia:
             palabras.append(palabra_limpia)
         else:
@@ -35,3 +42,5 @@ if __name__ == "__main__":
 
     except FileNotFoundError:
         print(f"No se pudo encontrar el archivo '{nombre_archivo}'")
+
+
