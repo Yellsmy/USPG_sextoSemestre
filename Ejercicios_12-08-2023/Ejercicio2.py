@@ -1,3 +1,6 @@
+#Programa que  lee un archivo de texto con código y muestra lista de con tokens identificados
+#Realizado por Roberto Castillo y Yellsmy Toj
+
 import re
 
 def identificar_tokens(codigo):
