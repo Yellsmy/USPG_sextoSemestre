@@ -1,11 +1,19 @@
-#Programa que  lee un archivo de texto con código y muestra lista de con tokens identificados
-#Realizado por Roberto Castillo y Yellsmy Toj
+
 
 import re
 
+def disparador_errores(token, numero_linea):
+    print("entré a la función")
+    print(token)
+    if token.count('.') > 1:
+
+        print(f'ERROR. EL VALOR {token} ENCONTRADO EN LA LÍNEA {numero_linea} ES INVÁLIDO ')
+        return True
+    return False
+
 def identificar_tokens(codigo):
 
-    palabras_clave = {'while', 'if', 'return', 'cout', 'cin'}
+    palabras_clave = {'while', 'if', 'return', 'cout', 'cin', 'do'}
     operadores_aritmeticos = {'+', '-', '*', '/', '%'}
     operadores_logicos = {'&&', '||', '>', '<', '==', '!='}
     simbolos_especiales = {'(', ')', '[', ']', '{', '}'}
@@ -17,20 +25,22 @@ def identificar_tokens(codigo):
     tokens_simbolos_especiales = []
 
     lineas = codigo.split('\n')
-    for linea in lineas:
-        palabras = re.findall(r"[\w]+|[^\s\w]", linea)
+    for numero_linea, linea in enumerate(lineas, start=1):
+        palabras = re.findall(r"[\w]+(?:\.[\w]+)*|[^\s\w]", linea)
         for palabra in palabras:
+            if disparador_errores(palabra, numero_linea):
+                break
             if palabra in palabras_clave:
-                tokens_palabras_clave.append(palabra)
+                tokens_palabras_clave.append((palabra + ' línea ' +str(numero_linea)))
             elif re.match(r"^[a-zA-Z_]\w*$", palabra):
-                tokens_identificadores.append(palabra)
+                tokens_identificadores.append((palabra + ' línea ' +str(numero_linea)))
             elif palabra in operadores_aritmeticos:
-                tokens_operadores.append(palabra)
+                tokens_operadores.append((palabra + ' línea ' +str(numero_linea)))
             elif palabra in operadores_logicos:
-                tokens_operadores_lógicos.append(palabra)
+                tokens_operadores_lógicos.append((palabra + ' línea ' +str(numero_linea)))
             elif palabra in simbolos_especiales:
-                tokens_simbolos_especiales.append(palabra)
-    
+                tokens_simbolos_especiales.append((palabra + ' línea ' +str(numero_linea)))
+
     return tokens_palabras_clave, tokens_identificadores, tokens_operadores, tokens_operadores_lógicos, tokens_simbolos_especiales
 
 if __name__ == "__main__":
