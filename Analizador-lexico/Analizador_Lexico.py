@@ -1,7 +1,7 @@
 '''
 Compiladores
 Analizador Léxico para el lenguaje de programación Java
-25 de agosto de 2023
+18 de septiembre de 2023
 Integrantes:
 Roberto Alejandro Castillo
 Yellsmy Lilibeth Toj García
@@ -71,24 +71,29 @@ class Analizador:
         tokens_validos = []
         lineas = codigo_fuente.split('\n')
         for numero_linea, linea in enumerate(lineas, start=1):
-            palabras = re.findall(r"[\w]+(?:\.[\w]+)*|@[\w]+|\d+\.\d+|\d+|\s*//.*|/\*.*?\*/|>>>|&&|\|\||>=|<=|==|!=|[-+*/%&|^<>]=|<<=|>>=|[^\s\w]", linea)
+            palabras  = re.findall(r"[\w]+(?:\.[\w]+)*|@[\w]+|\d+\.\d+|\d+|'(?:[^'\\]|\\.)*'|\"(?:[^\"\\]|\\.)*\"|//.*|/\*.*?\*/|>>>|&&|\|\||>=|<=|==|!=|[-+*/%&|^<>]=|<<=|>>=|[^\s\w]", linea)
+
 
             for palabra in palabras:
                 try:
-                    if self.token_analizado.disparador_errores(palabra, numero_linea):
+                    tipo = self.token_analizado.determinar_tipo_token(palabra)
+                    if '"' in palabra or "'" in palabra:
+                    # Token es una cadena, así que almacénala como tal
+                        tokens_validos.append(('CADENA', palabra[1:-1], numero_linea))
+
+                    elif self.token_analizado.disparador_errores(palabra, numero_linea):
                         break
                     elif "." in palabra:
                         subtokens = palabra.split(".")
                         for subtoken in subtokens:
-                            tipo = self.token_analizado.determinar_tipo_token(subtoken)
-                            tokens_validos.append((tipo, subtoken, numero_linea))
+                            tipo2 = self.token_analizado.determinar_tipo_token(subtoken)
+                            tokens_validos.append((tipo2, subtoken, numero_linea))
                             if subtoken != subtokens[-1]:
                                 tokens_validos.append(('DELIMITADOR', '.', numero_linea))
-                    else:
-                        tipo = self.token_analizado.determinar_tipo_token(palabra)
-                        if tipo == 'DESCONOCIDO':
+                    elif tipo == 'DESCONOCIDO':
                             print(f'NO SE RECONOCIÓ EL VALOR {palabra} EN LA LÍNEA {numero_linea}')
                             sys.exit(1) 
+                    else:
                         tokens_validos.append((tipo, palabra, numero_linea))
                 
                 except Exception as e:
@@ -105,14 +110,13 @@ class AnalizadorTokens:
             'generic', 'goto', 'if', 'implements', 'import', 'inner', 'instanceof', 'int', 'interface', 'long', 'native',
             'new', 'null', 'operator', 'outer', 'package', 'private', 'protected', 'public', 'rest', 'return', 'short',
             'static', 'strictfp', 'super', 'switch', 'synchronized', 'this', 'threadsafe', 'throw', 'throws', 'transient',
-            'true', 'try', 'var', 'void', 'volatile', 'while'
+            'true', 'try', 'var', 'void', 'volatile', 'while', 'main',  'println', 'List',
+            'ArrayList', 'add'
         }
 
-        self.operadores_aritmeticos = {'+', '-', '*', '/', '%'}
-        self.operadores_logicos = {'&&', '||', '>', '<', '>=', '<=', '==', '!=', '!', '&', '|', '?', '\\'}
-        self.operadores_asignacion = {'=', '+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=', '>>=', '>>>='}
-        self.operadores_incremento_decremento = {'++', '--'}
-        self.operadores_bit_a_bit = {'~', '&', '|', '^', '<<', '>>', '>>>'}
+        self.operadores = {'+', '-', '*', '/', '%', '&&', '||', '>', '<', '>=', '<=', '==', '!=', '!', '&', '|', '?',
+                           '\\', '=', '+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=', '>>=', '>>>=', '++', '--',
+                           '~', '&', '|', '^', '<<', '>>', '>>>'}
         self.delimitadores = {'(', ')', '[', ']', '{', '}', ';', ',', '.', '"', ':'}
         self.comentarios = [
             re.compile(r'^\s*//.*$'),
@@ -131,8 +135,9 @@ class AnalizadorTokens:
         elif re.match(r"^\d+[a-zA-Z_$][\w$]*$", token):
             print(f'ERROR. EL VALOR "{token}" EN LA LÍNEA {numero_linea} COMIENZO CON UN NÚMERO')
             sys.exit(1)
+         # Nota: Verificar cuáles palabras pueden iniciar con mayúscula y cuáles no
         elif token.lower() in self.palabras_reservadas and token != token.lower():
-            print(f'ERROR. La palabra reservada "{token}" encontrada en la LÍNEA {numero_linea} está escrita incorrectamente.')
+            print(f'ERROR. LA PALABRA RESERVADA "{token}" ENCONTRADA EN LA LÍNEA {numero_linea} ESTÁ ESCRITA INCORRECTAMENTE.')
             sys.exit(1)
         elif "ñ" in token.lower():
             print(f'ERROR. El identificador "{token}" en la línea {numero_linea} es inválido')
@@ -148,15 +153,7 @@ class AnalizadorTokens:
             return 'PALABRA_RESERVADA'
         elif re.match(r"^[a-zA-Z_$][a-zA-Z0-9_$]*$", palabra) and palabra.lower() not in self.palabras_reservadas:
             return 'IDENTIFICADOR'
-        elif palabra in self.operadores_aritmeticos:
-            return 'OPERADOR'
-        elif palabra in self.operadores_logicos:
-            return 'OPERADOR'
-        elif palabra in self.operadores_asignacion:
-            return 'OPERADOR'
-        elif palabra in self.operadores_incremento_decremento:
-            return 'OPERADOR'
-        elif palabra in self.operadores_bit_a_bit:
+        elif palabra in self.operadores:
             return 'OPERADOR'
         elif palabra in self.delimitadores:
             return 'DELIMITADOR'
