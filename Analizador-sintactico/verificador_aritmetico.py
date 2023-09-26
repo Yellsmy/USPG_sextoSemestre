@@ -1,7 +1,7 @@
 '''
 Compiladores
 Operaciones Aritméticas
-23 de septiembre de 2023
+25 de septiembre de 2023
 Integrantes:
 Roberto Alejandro Castillo
 Yellsmy Lilibeth Toj García
@@ -16,7 +16,7 @@ def es_operador(caracter):
 def es_numero(caracter):
     return caracter.isdigit() or (caracter == '.')
 
-def calcular_operacion(num_primero, signo, num_segundo):
+def calcular_resultado(num_primero, signo, num_segundo):
     if signo == '+':
         return num_primero + num_segundo
     elif signo == '-':
@@ -40,17 +40,21 @@ def operar_expresion(expresion):
     for caracter in expresion:
         if caracter == ' ':
             continue
-        elif es_numero(caracter) or (caracter == '-' and (not temp or temp[-1] in "+-*/")):
+        elif es_numero(caracter) or (caracter == '-' and not temp):
             temp += caracter
         elif es_operador(caracter):
             if temp:
                 numeros.append(float(temp))
+                print("Numeros: ", numeros)
                 temp = ""
-            while operadores and (caracter in "+-" or operadores[-1] in "*/") and (caracter != "^" or operadores[-1] != "^"):
+            while operadores and (caracter in "+-" or operadores[-1] in "*/"):
+                print("Operadores", operadores)
+                print("Caracter: ", caracter)
                 num2 = numeros.pop()
                 num1 = numeros.pop()
                 operador = operadores.pop()
-                resultado = calcular_operacion(num1, operador, num2)
+                resultado = calcular_resultado(num1, operador, num2)
+                print("Resultado:", resultado)
                 numeros.append(resultado)
             operadores.append(caracter)
         else:
@@ -64,7 +68,7 @@ def operar_expresion(expresion):
         num2 = numeros.pop()
         num1 = numeros.pop()
         operador = operadores.pop()
-        resultado = calcular_operacion(num1, operador, num2)
+        resultado = calcular_resultado(num1, operador, num2)
         numeros.append(resultado)
 
     if len(numeros) == 1:
