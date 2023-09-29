@@ -45,16 +45,12 @@ def operar_expresion(expresion):
         elif es_operador(caracter):
             if temp:
                 numeros.append(float(temp))
-                print("Numeros: ", numeros)
                 temp = ""
             while operadores and (caracter in "+-" or operadores[-1] in "*/"):
-                print("Operadores", operadores)
-                print("Caracter: ", caracter)
                 num2 = numeros.pop()
                 num1 = numeros.pop()
                 operador = operadores.pop()
                 resultado = calcular_resultado(num1, operador, num2)
-                print("Resultado:", resultado)
                 numeros.append(resultado)
             operadores.append(caracter)
         else:
