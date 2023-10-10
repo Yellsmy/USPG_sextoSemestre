@@ -38,6 +38,7 @@ def operar_expresion(expresion):
     temp = ""
     disparador_errores(expresion)
     for caracter in expresion:
+        print("El caracter es: ", caracter)
         if caracter == ' ':
             continue
         elif es_numero(caracter) or (caracter == '-' and not temp):
@@ -45,12 +46,18 @@ def operar_expresion(expresion):
         elif es_operador(caracter):
             if temp:
                 numeros.append(float(temp))
+                print("Número almacenado en la lista: ", temp)
                 temp = ""
             while operadores and (caracter in "+-" or operadores[-1] in "*/"):
+                
                 num2 = numeros.pop()
+                print("Segundo Número: ", num2)
                 num1 = numeros.pop()
+                print("Primer Número: ", num1)
                 operador = operadores.pop()
+                print("Operador: ", operador)
                 resultado = calcular_resultado(num1, operador, num2)
+                print("Resultado: ", resultado)
                 numeros.append(resultado)
             operadores.append(caracter)
         else:
@@ -59,7 +66,12 @@ def operar_expresion(expresion):
 
     if temp:
         numeros.append(float(temp))
-
+    print("Números:")
+    for elemento in numeros:
+        print(elemento)
+    print("Operadores:")
+    for elemento in operadores:
+        print(elemento)
     while operadores:
         num2 = numeros.pop()
         num1 = numeros.pop()

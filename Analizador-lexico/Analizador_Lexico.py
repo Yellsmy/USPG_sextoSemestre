@@ -114,9 +114,9 @@ class AnalizadorTokens:
             'ArrayList', 'add'
         }
 
-        self.operadores = {'+', '-', '*', '/', '%', '&&', '||', '>', '<', '>=', '<=', '==', '!=', '!', '&', '|', '?',
-                           '\\', '=', '+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=', '>>=', '>>>=', '++', '--',
-                           '~', '&', '|', '^', '<<', '>>', '>>>'}
+        self.operadores = ['+', '-', '*', '/', '%', '\\', '=', '+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=', '>>=', '>>>=', '++', '--', '~', '^', '<<', '>>']
+
+        self.condicionales = {'&&', '||', '>', '<', '>=', '<=', '==', '!=', '!', '&', '|', '?'}
         self.delimitadores = {'(', ')', '[', ']', '{', '}', ';', ',', '.', '"', ':'}
         self.comentarios = [
             re.compile(r'^\s*//.*$'),
@@ -157,6 +157,8 @@ class AnalizadorTokens:
             return 'OPERADOR'
         elif palabra in self.delimitadores:
             return 'DELIMITADOR'
+        elif palabra in self.condicionales:
+            return 'CONDICION'
         elif any(patron.match(palabra) for patron in self.comentarios):
             return 'COMENTARIO'
         elif palabra in self.anotaciones:

@@ -77,7 +77,7 @@ def imprimir_resultado(pila, lista_delimitadores_cierre):
 
 
 def main():
-    archivo_tokens = 'tokens_1.txt'
+    archivo_tokens = 'tokens_2.txt'
     lines = leer_archivo(archivo_tokens)
     tokens = analizar_tokens(lines)
     pila = Pila()
