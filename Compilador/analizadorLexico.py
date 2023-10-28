@@ -66,8 +66,6 @@ reserved = {
     "boolean": "BOOLEAN",
     "double": "DOUBLE",
     "for": "FOR",
-    "True": "TRUE",
-    "False": "FALSE",
     "package": "PACKAGE",
 }
 

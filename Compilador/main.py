@@ -1,4 +1,4 @@
-'''
+''' 
 Compilador
 Fase 1 y 2
 10 de octubre de 2023
@@ -84,7 +84,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nAnálisis de tokens interrumpido por el usuario.")
 
 
 
+#

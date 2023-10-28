@@ -38,12 +38,13 @@ def p_class_declaration(p):
 # Reglas de producción para el cuerpo de la clase
 def p_class_body(p):
     """
-    class_body : statement main 
-               | class_body statement
+    class_body : statements main 
+               | class_declaration 
                | main
-               | statement class_body
+               | statements
+               | statements main statements
     """
-    
+     
     p[0] = ("body: ", p[1:])
     
 
@@ -74,11 +75,6 @@ def p_expression(p):
     """
     expression : ID
                | NUMBER
-               | ID EQUALS propiedades
-               | ID GT propiedades
-               | ID GE propiedades
-               | ID LE propiedades
-               | ID LT propiedades
                | NOT expression
     """
     
@@ -92,14 +88,14 @@ def p_expression(p):
 
 # Reglas de producción para condiciones
 def p_condicion(p):
-    ''' condicion : ID EQUALS NUMBER
+    ''' condicion : ID EQ NUMBER
                | ID GT NUMBER
                | ID GE NUMBER
                | ID LE NUMBER
                | ID LT NUMBER
                | ID AND NUMBER
                | ID OR NUMBER
-               | NUMBER EQUALS NUMBER
+               | NUMBER EQ NUMBER
                | NUMBER GT NUMBER
                | NUMBER GE NUMBER
                | NUMBER LE NUMBER
@@ -107,7 +103,12 @@ def p_condicion(p):
                | ID AND ID
                | ID OR ID
                | ID EQ ID 
-               | ID EQ STRING_LITERAL '''
+               | ID EQ STRING_LITERAL
+               | ID EQUALS propiedades
+               | ID GT propiedades
+               | ID GE propiedades
+               | ID LE propiedades
+               | ID LT propiedades '''
     
     p[0] = ("condicion: ", p[1], p[2], p[3])
     
@@ -124,13 +125,18 @@ def p_increment_or_decrement(p):
 
 # Reglas de producción para bucles for y for-each 
 def p_for_statement(p):
-    ''' for_statement : FOR LPAREN INT ID EQUALS NUMBER SEMI condicion SEMI increment_or_decrement RPAREN LBRACE statements RBRACE
-                      | FOR LPAREN INT ID EQUALS NUMBER SEMI expression SEMI increment_or_decrement RPAREN LBRACE statements RBRACE
+    ''' for_statement : FOR LPAREN inicializacion SEMI condicion SEMI increment_or_decrement RPAREN LBRACE statements RBRACE
                       | FOR LPAREN tipo_palabra ID COLON ID RPAREN LBRACE statements RBRACE'''
     
     p[0] = ("for:", p[1:]) 
     #print("for: ", p[0])
     
+
+# Regla de producción para la inicialización en un bucle for
+def p_inicializacion(p):
+    ''' inicializacion : INT ID EQUALS NUMBER '''
+
+    p[0] = ("inicialización: ", p[2], p[3], p[4])
 
 
 # Reglas de producción para sentencias if
@@ -208,16 +214,22 @@ def p_assignment(p):
     
 
 
-# Reglas de producción de declaración de variables:
+# Reglas de producción de declaración e inicialización de variables:
 #- Declaración de variales que contengan números
 #- Declaración de variables que contengan cadena
 #- Declaración de variables que contengan valor booleano
 def p_dcl_variable(p):
     '''dcl_variable : tipo_number ID EQUALS NUMBER
                     | tipo_palabra ID EQUALS STRING_LITERAL
-                    | tipo_booleano ID EQUALS valor_boolean'''
+                    | tipo_booleano ID EQUALS valor_boolean
+                    | tipo_number ID
+                    | tipo_palabra ID
+                    | tipo_booleano ID '''
     
-    p[0] = (p[1], p[2], p[4])
+    if len(p) == 5:
+        p[0] = (p[1], p[2], p[4]) 
+    else:
+        p[0] = (p[1], p[2]) 
     #print("dcl_variable: ", p[0])
     
 
