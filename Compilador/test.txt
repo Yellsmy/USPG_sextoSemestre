@@ -1,0 +1,39 @@
+class HelloWorld {
+    int i = 3;
+    public static void main(String[] args) {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(i);
+        }
+        
+        for (String color : colores) {
+            System.out.println(color);
+        }
+        
+        for (int i = 0; i < numeros.length; i++) {
+            System.out.println(numeros[i]);
+        }
+        
+        int puntaje = 85;
+        
+        boolean isTrue = true;
+        
+        String palabra = "Hola mundo";
+        
+        double precio = 3.99;
+        
+        String[] colores = {"azul", "morado", "rosa", "amarillo"};
+        
+        int[] numeros = {1, 2, 3, 4, 5};
+        
+        int[] objetos_cocina = {mesa, silla, estufa, cuchillo};
+        
+        if (palabra == "Hola") {
+            System.out.println("Excelente puntaje.");
+            String palabra = "Hola mundo";
+        } else if (puntaje >= 70) {
+            System.out.println("Buen puntaje.");
+        } else {
+            System.out.println("Puntaje regular.");
+        }
+    }
+}

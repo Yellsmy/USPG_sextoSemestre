@@ -1,0 +1,414 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> for_statement
+Rule 1     for_statement -> FOR LPAREN for_initial SEMICOLON condition SEMICOLON for_update RPAREN LBRACE body RBRACE
+Rule 2     for_initial -> INT IDENTIFIER EQUALS NUMERIC
+Rule 3     for_update -> IDENTIFIER INCREMENT
+Rule 4     condition -> expression GT expression
+Rule 5     condition -> expression LT expression
+Rule 6     condition -> expression GE expression
+Rule 7     condition -> expression LE expression
+Rule 8     condition -> expression EQ expression
+Rule 9     condition -> expression NEQ expression
+Rule 10    expression -> NUMERIC
+Rule 11    expression -> IDENTIFIER
+Rule 12    body -> PRINT LPAREN STRING RPAREN SEMICOLON
+Rule 13    body -> PRINT LPAREN NUMERIC RPAREN SEMICOLON
+
+Terminals, with rules where they appear
+
+EQ                   : 8
+EQUALS               : 2
+FOR                  : 1
+GE                   : 6
+GT                   : 4
+IDENTIFIER           : 2 3 11
+INCREMENT            : 3
+INT                  : 2
+LBRACE               : 1
+LE                   : 7
+LPAREN               : 1 12 13
+LT                   : 5
+NEQ                  : 9
+NUMERIC              : 2 10 13
+PRINT                : 12 13
+RBRACE               : 1
+RPAREN               : 1 12 13
+SEMICOLON            : 1 1 12 13
+STRING               : 12
+error                : 
+
+Nonterminals, with rules where they appear
+
+body                 : 1
+condition            : 1
+expression           : 4 4 5 5 6 6 7 7 8 8 9 9
+for_initial          : 1
+for_statement        : 0
+for_update           : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . for_statement
+    (1) for_statement -> . FOR LPAREN for_initial SEMICOLON condition SEMICOLON for_update RPAREN LBRACE body RBRACE
+
+    FOR             shift and go to state 2
+
+    for_statement                  shift and go to state 1
+
+state 1
+
+    (0) S' -> for_statement .
+
+
+
+state 2
+
+    (1) for_statement -> FOR . LPAREN for_initial SEMICOLON condition SEMICOLON for_update RPAREN LBRACE body RBRACE
+
+    LPAREN          shift and go to state 3
+
+
+state 3
+
+    (1) for_statement -> FOR LPAREN . for_initial SEMICOLON condition SEMICOLON for_update RPAREN LBRACE body RBRACE
+    (2) for_initial -> . INT IDENTIFIER EQUALS NUMERIC
+
+    INT             shift and go to state 5
+
+    for_initial                    shift and go to state 4
+
+state 4
+
+    (1) for_statement -> FOR LPAREN for_initial . SEMICOLON condition SEMICOLON for_update RPAREN LBRACE body RBRACE
+
+    SEMICOLON       shift and go to state 6
+
+
+state 5
+
+    (2) for_initial -> INT . IDENTIFIER EQUALS NUMERIC
+
+    IDENTIFIER      shift and go to state 7
+
+
+state 6
+
+    (1) for_statement -> FOR LPAREN for_initial SEMICOLON . condition SEMICOLON for_update RPAREN LBRACE body RBRACE
+    (4) condition -> . expression GT expression
+    (5) condition -> . expression LT expression
+    (6) condition -> . expression GE expression
+    (7) condition -> . expression LE expression
+    (8) condition -> . expression EQ expression
+    (9) condition -> . expression NEQ expression
+    (10) expression -> . NUMERIC
+    (11) expression -> . IDENTIFIER
+
+    NUMERIC         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+
+    condition                      shift and go to state 8
+    expression                     shift and go to state 9
+
+state 7
+
+    (2) for_initial -> INT IDENTIFIER . EQUALS NUMERIC
+
+    EQUALS          shift and go to state 12
+
+
+state 8
+
+    (1) for_statement -> FOR LPAREN for_initial SEMICOLON condition . SEMICOLON for_update RPAREN LBRACE body RBRACE
+
+    SEMICOLON       shift and go to state 13
+
+
+state 9
+
+    (4) condition -> expression . GT expression
+    (5) condition -> expression . LT expression
+    (6) condition -> expression . GE expression
+    (7) condition -> expression . LE expression
+    (8) condition -> expression . EQ expression
+    (9) condition -> expression . NEQ expression
+
+    GT              shift and go to state 14
+    LT              shift and go to state 15
+    GE              shift and go to state 16
+    LE              shift and go to state 17
+    EQ              shift and go to state 18
+    NEQ             shift and go to state 19
+
+
+state 10
+
+    (10) expression -> NUMERIC .
+
+    GT              reduce using rule 10 (expression -> NUMERIC .)
+    LT              reduce using rule 10 (expression -> NUMERIC .)
+    GE              reduce using rule 10 (expression -> NUMERIC .)
+    LE              reduce using rule 10 (expression -> NUMERIC .)
+    EQ              reduce using rule 10 (expression -> NUMERIC .)
+    NEQ             reduce using rule 10 (expression -> NUMERIC .)
+    SEMICOLON       reduce using rule 10 (expression -> NUMERIC .)
+
+
+state 11
+
+    (11) expression -> IDENTIFIER .
+
+    GT              reduce using rule 11 (expression -> IDENTIFIER .)
+    LT              reduce using rule 11 (expression -> IDENTIFIER .)
+    GE              reduce using rule 11 (expression -> IDENTIFIER .)
+    LE              reduce using rule 11 (expression -> IDENTIFIER .)
+    EQ              reduce using rule 11 (expression -> IDENTIFIER .)
+    NEQ             reduce using rule 11 (expression -> IDENTIFIER .)
+    SEMICOLON       reduce using rule 11 (expression -> IDENTIFIER .)
+
+
+state 12
+
+    (2) for_initial -> INT IDENTIFIER EQUALS . NUMERIC
+
+    NUMERIC         shift and go to state 20
+
+
+state 13
+
+    (1) for_statement -> FOR LPAREN for_initial SEMICOLON condition SEMICOLON . for_update RPAREN LBRACE body RBRACE
+    (3) for_update -> . IDENTIFIER INCREMENT
+
+    IDENTIFIER      shift and go to state 22
+
+    for_update                     shift and go to state 21
+
+state 14
+
+    (4) condition -> expression GT . expression
+    (10) expression -> . NUMERIC
+    (11) expression -> . IDENTIFIER
+
+    NUMERIC         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+
+    expression                     shift and go to state 23
+
+state 15
+
+    (5) condition -> expression LT . expression
+    (10) expression -> . NUMERIC
+    (11) expression -> . IDENTIFIER
+
+    NUMERIC         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+
+    expression                     shift and go to state 24
+
+state 16
+
+    (6) condition -> expression GE . expression
+    (10) expression -> . NUMERIC
+    (11) expression -> . IDENTIFIER
+
+    NUMERIC         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+
+    expression                     shift and go to state 25
+
+state 17
+
+    (7) condition -> expression LE . expression
+    (10) expression -> . NUMERIC
+    (11) expression -> . IDENTIFIER
+
+    NUMERIC         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+
+    expression                     shift and go to state 26
+
+state 18
+
+    (8) condition -> expression EQ . expression
+    (10) expression -> . NUMERIC
+    (11) expression -> . IDENTIFIER
+
+    NUMERIC         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+
+    expression                     shift and go to state 27
+
+state 19
+
+    (9) condition -> expression NEQ . expression
+    (10) expression -> . NUMERIC
+    (11) expression -> . IDENTIFIER
+
+    NUMERIC         shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+
+    expression                     shift and go to state 28
+
+state 20
+
+    (2) for_initial -> INT IDENTIFIER EQUALS NUMERIC .
+
+    SEMICOLON       reduce using rule 2 (for_initial -> INT IDENTIFIER EQUALS NUMERIC .)
+
+
+state 21
+
+    (1) for_statement -> FOR LPAREN for_initial SEMICOLON condition SEMICOLON for_update . RPAREN LBRACE body RBRACE
+
+    RPAREN          shift and go to state 29
+
+
+state 22
+
+    (3) for_update -> IDENTIFIER . INCREMENT
+
+    INCREMENT       shift and go to state 30
+
+
+state 23
+
+    (4) condition -> expression GT expression .
+
+    SEMICOLON       reduce using rule 4 (condition -> expression GT expression .)
+
+
+state 24
+
+    (5) condition -> expression LT expression .
+
+    SEMICOLON       reduce using rule 5 (condition -> expression LT expression .)
+
+
+state 25
+
+    (6) condition -> expression GE expression .
+
+    SEMICOLON       reduce using rule 6 (condition -> expression GE expression .)
+
+
+state 26
+
+    (7) condition -> expression LE expression .
+
+    SEMICOLON       reduce using rule 7 (condition -> expression LE expression .)
+
+
+state 27
+
+    (8) condition -> expression EQ expression .
+
+    SEMICOLON       reduce using rule 8 (condition -> expression EQ expression .)
+
+
+state 28
+
+    (9) condition -> expression NEQ expression .
+
+    SEMICOLON       reduce using rule 9 (condition -> expression NEQ expression .)
+
+
+state 29
+
+    (1) for_statement -> FOR LPAREN for_initial SEMICOLON condition SEMICOLON for_update RPAREN . LBRACE body RBRACE
+
+    LBRACE          shift and go to state 31
+
+
+state 30
+
+    (3) for_update -> IDENTIFIER INCREMENT .
+
+    RPAREN          reduce using rule 3 (for_update -> IDENTIFIER INCREMENT .)
+
+
+state 31
+
+    (1) for_statement -> FOR LPAREN for_initial SEMICOLON condition SEMICOLON for_update RPAREN LBRACE . body RBRACE
+    (12) body -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (13) body -> . PRINT LPAREN NUMERIC RPAREN SEMICOLON
+
+    PRINT           shift and go to state 33
+
+    body                           shift and go to state 32
+
+state 32
+
+    (1) for_statement -> FOR LPAREN for_initial SEMICOLON condition SEMICOLON for_update RPAREN LBRACE body . RBRACE
+
+    RBRACE          shift and go to state 34
+
+
+state 33
+
+    (12) body -> PRINT . LPAREN STRING RPAREN SEMICOLON
+    (13) body -> PRINT . LPAREN NUMERIC RPAREN SEMICOLON
+
+    LPAREN          shift and go to state 35
+
+
+state 34
+
+    (1) for_statement -> FOR LPAREN for_initial SEMICOLON condition SEMICOLON for_update RPAREN LBRACE body RBRACE .
+
+    $end            reduce using rule 1 (for_statement -> FOR LPAREN for_initial SEMICOLON condition SEMICOLON for_update RPAREN LBRACE body RBRACE .)
+
+
+state 35
+
+    (12) body -> PRINT LPAREN . STRING RPAREN SEMICOLON
+    (13) body -> PRINT LPAREN . NUMERIC RPAREN SEMICOLON
+
+    STRING          shift and go to state 36
+    NUMERIC         shift and go to state 37
+
+
+state 36
+
+    (12) body -> PRINT LPAREN STRING . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 38
+
+
+state 37
+
+    (13) body -> PRINT LPAREN NUMERIC . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 39
+
+
+state 38
+
+    (12) body -> PRINT LPAREN STRING RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 40
+
+
+state 39
+
+    (13) body -> PRINT LPAREN NUMERIC RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 41
+
+
+state 40
+
+    (12) body -> PRINT LPAREN STRING RPAREN SEMICOLON .
+
+    RBRACE          reduce using rule 12 (body -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+
+
+state 41
+
+    (13) body -> PRINT LPAREN NUMERIC RPAREN SEMICOLON .
+
+    RBRACE          reduce using rule 13 (body -> PRINT LPAREN NUMERIC RPAREN SEMICOLON .)
+

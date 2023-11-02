@@ -1,0 +1,1 @@
+Analizador léxico más conocido como scanner es la priemar fase del compilador, revisa que las palabras estén bien escritas. Recibe código fuente y como salida produce tokens 
