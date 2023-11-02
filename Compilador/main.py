@@ -37,6 +37,11 @@ def almacenar_ver_tokens(codigo):
         except Exception as e:
             print(f"Ocurrió un error al almacenar los tokens en el archivo: {e}")
 
+    imprimir = input("¿Desea ver los tokens válidos almacenados? (Si/No): ")
+    if imprimir.lower() == "si" or imprimir.lower() == "s":
+        for token in tokensValidos:
+            print(token)
+
 def main():
     try:
         print('¡BIENVENIDO!')
@@ -60,7 +65,3 @@ if __name__ == "__main__":
         main()
     except KeyboardInterrupt:
         print("\nAnálisis de tokens interrumpido por el usuario.")
-
-
-
-#
