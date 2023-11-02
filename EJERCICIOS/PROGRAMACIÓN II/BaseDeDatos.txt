@@ -1,0 +1,6 @@
+ 1|Yellsmy |Toj|2345768910101|yltg|500.0|3772950|Activa
+ 2|Yellsmy|Toj|YT|YT|300.0|4871025|Activa
+ 3|Marcos|Herrarte|2345109870102|mh|200.0|2774832|Activa
+ 4|María|Tzul|234589674561214|M00|100.0|7343891|Activa
+ 5|Lilibeth|Toj|209887748399201|765|100|3986311|Activa
+ 6|Roberto|Castillo|123456767890|MalumaBaby|0|7907132|Activa

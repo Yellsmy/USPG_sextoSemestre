@@ -1,0 +1,347 @@
+Class Estudiante:
+    //Definición de atributos
+    Estatura = 0
+    Nombre_Estudiante = ""
+    Edad = 0
+
+    //Definición de métodos
+    Escribir():
+    Estudiar():
+
+End Class
+
+//Crear un objeto para la clase
+Primer_Anio= new Estudiante()
+Segundo_anio = new Estudiante()
+
+//Asignación de valor a los atributos
+Primer_Anio.Nombre_Estudiante = "Pedro"
+Primer_Anio.Edad = 23
+Primer_Anio.Estatura = 1.60
+Segundo_anio.Nombre_Estudiante = "Sergio"
+Segundo_anio.Edad = 25
+Segundo_anio.Estatura = 1.79
+
+
+Class Maestro:
+    //Definición de 
+    Nombre_Maestro = ""
+    Profesión = ""
+
+    //Definición de métodos
+    Enseñar():
+    Trabajar(Sueldo, Puesto):
+
+End Class
+
+//Crear un objeto para la clase
+Maestro1= New Maestro()
+Maestro2 = New Maestro()
+
+//Asignación de valor a los atributos
+Maestro1.Nombre = "Álvaro Sánchez"
+Maestro1.Profesión = "Físico Matemático"
+Maestro2.Nombre = "Sergio Méndez" 
+Maestro2.Profesion = "Ingeniero en sistemas"
+
+
+Class Curso:
+    //Definición de atributos
+    Catedratico = ""
+    Sección = ""
+    Cantidad_Créditos = 0
+
+    //Definición de métodos
+    Entrega_tareas()
+    Aprobado()
+
+End Class
+
+//Crear un objeto para la clase
+Matematica = New Curso()
+Comunicación = New Curso()
+
+//Asignación de valor a los atributos
+Matematica.Catedratico = "Elsa Cua"
+Matematica.Sección =  “B”
+Matematica.Cantidad_Créditos = 4
+Comunicación.Catedratico = “Marta Elvira Sanchez”
+Comunicación.Sección = "B"
+Comunicación.Cantidad_Créditos = 2
+
+
+Class Aula:
+    //Definición de atributos
+    Pupitres = 0
+    Pizarra = ""
+
+    //Definición de métodos
+    Cobertura()
+    Protección()
+
+End Class
+
+//Crear un objeto para la clase
+Aula203 = New Aula()
+Aula101 = New Alula()
+
+//Asignación de valor a los atributos
+Aula203.Pupitres = 32
+Aula203.pizarra = "De corcho"
+Aula101.Pupitres = 25
+Aula101.pizarra= “De corcho”
+
+
+Class Carrera:
+    //Definición de atributos
+    Nombre_Carrera = ""
+    Duración = ""
+    MayaEstudiantil = ""
+
+    //Definición de métodos
+    Especialización()
+    HistorialCursosAprobados()
+
+End Class
+
+//Crear un objeto para la clase
+Carrera_1 = New Carrera()
+Carrera_2 = New Carrera()
+
+//Asignación de valor a los atributos
+Carrera_1.Nombre_Carrera = "Ingeniería en Sistemas"
+Carrera_1.Duracion = “4 años”
+Carrera_1.Mayaestudiantil = “Programación, Matemática, Física, Comunicación”
+Carrera_2.Nombre_Carrera = "Psicología Industrial"
+Carrera_2.Duración = "4 años"
+Carrera_2.MayaEstudiantil = "Psicología Social, Estadistica, Psicoética, Antropología"
+
+
+Class Semestre:
+    //Definición de atributos
+    Jornada = ""
+    Duraciónmeses = 0
+
+    //Definición de métodos
+    AvancePróximoSemestre()
+    AcreditaciónAcadémica(12,"Cursos Aprobados"):
+
+End Class
+
+//Crear un objeto para la clase
+Primero = New semestre()
+Tercero = New Semestre()
+
+//Asignación de valor a los atributos
+Primero.Jornada = "Fin de semana"
+Primero.Duraciónmeses = 5
+Tercero.Jornada = “Matutina”
+Tercero.Duraciónmeses = 5
+
+
+
+Class Departamento:
+    //Definición de atributos
+    Nombre_Departamento = ""
+    Colaboradores = 0
+
+    //Definición de métodos
+    ResolucióndeProblemas()
+    Controlar()
+
+End Class
+
+//Crear un objeto para la clase
+DepartamentoI = New Departamento()
+DepartamentoII = New Departamento()
+
+//Asignación de valor a los atributos
+DepartamentoI.Nombre_Departamento = "Coordinación"
+DepartamentoI.Colaboradores = 15
+DepartamentoII.Nombre_Departamento = "Contabilidad"
+DepartamentoII.Colaboradores = 20
+
+
+
+Class Directiva:
+    //Definición de atributos
+    Nombre = ""
+    GradoAcadémico = ""
+
+    //Definición de métodos
+    organizar()
+    Reuniones(4,mes)
+
+End Class
+
+//Crear un objeto para la clase
+Rector = New Directiva()
+Vicerector = New Directiva()
+
+//Asignación de valor a los atributos
+Rector.Nombre = “Harold Caballeros”
+Rector.Gradoacademico = “Doctorado en Tecnología”
+
+
+
+Class Cafetería:
+    //Definición de atributos
+    Sillas = 
+    Mesas = 0
+
+    //Definición de métodos
+    ProvisióndeAlimentos()
+    EspacioParaComer(4,mesa)
+
+End Class
+
+//Crear un objeto para la clase
+Estado = New Cafetería()
+Cantidad = New Cafetería()
+
+//Asignación de valor a los atributos
+Estado.Sillas = "Óptimo"
+Cantidad.Sillas = 50
+Estado.Mesas = "Estandar"
+Cantidad.Mesas = 25
+
+
+
+Class Biblioteca:
+    //Definición de atributos
+    Libros = 0
+    PaginasWeb = ""
+
+    //Definición de métodos
+    Informar()
+    ResolverDudas()
+
+End Class
+
+//Crear un objeto para la clase
+SeccionTecnologia = New Biblioteca()
+SeccionPoesía = New Biblioteca()
+
+//Asignación de valor a los atributos
+SeccionTecnologia.Libros = 300
+SeccionTecnologia.PaginasWeb = 5
+SeccionPoesía.Libros = 120
+SeccionPoesía.PaginasWeb = 10
+
+
+
+Class Facultad:
+    //Definición de atributos
+    GradoAcadémico = ""
+    Especialización = ""
+
+    //Definición de métodos
+    DesarrollarConocimiento()
+    Dar docencia()
+
+End Class
+
+//Crear un objeto para la clase
+CienciasEmpresariales = New Facultad()
+Liderazgo = New Facultad()
+
+//Asignación de valor a los atributos
+CienciasEmpresariales.Especialización = “Auditoria”
+CienciasEmpresariales.GradoAcadémico= “Pregrado y posgrado”
+Liderazgo.Especialización = "Liderazgo Organizacional"
+Liderazgo.GradoAcadémico = "Posgrado
+
+
+
+
+Class Asesor:
+    //Definición de atributos
+    Nombre = ""
+    Edad = 0
+
+    //Definición de métodos
+    Asesorar()
+    Apoyar():
+
+End Class
+
+//Crear un objeto para la clase
+Academico = New Asesor()
+Admisión = New Asesor()
+
+//Asignación de valor a los atributos
+Admisión.Nombre = “Jener”
+Admisión.Edad = 25
+Academico.Nombre = "José Luis"
+Academico.Edad = 28
+
+
+
+
+Class Publicaciones:
+    //Definición de atributos
+    Portada = ""
+    Normas = ""
+
+    //Definición de métodos
+    Informar()
+    Opinar()
+
+End Class
+
+//Crear un objeto para la clase
+Junio = New Publicaciones()
+Agosto = New Publicaciones()
+
+//Asignación de valor a los atributos
+Junio.Portada = “Avance tecnológico”
+Junio.Normas = "APA"
+Agosto.Portada = "Comunicación y Liderazgo"
+Agosto.Normas = “APA”
+
+
+
+Class oficinas:
+    //Definición de atributos
+    Secretaria = ""
+    Computadoras = 0
+
+    //Definición de métodos
+    AtenciónTelefónica()
+    Control()
+
+End Class
+
+//Crear un objeto para la clase
+Contable = New Oficina()
+Recepción = New Oficina()
+
+//Asignación de valor a los atributos
+Contable.Secretaria = "Amanda"
+Contable.Computadoras = 4
+Recepción.Secretaria = “Estela”
+Recepción.Computadoras = 3
+
+
+
+
+Class Laboratorio:
+    //Definición de atributos
+    Utensilios = ""
+    Computadora = 0
+
+    //Definición de métodos
+    Investigación()
+    
+End Class
+
+//Crear un objeto para la clase
+Computación = New Laboratorio()
+Química = New Laboratorio()
+
+//Asignación de valor a los atributos
+Química.utensilios= “Vaso de precipitado”
+Química.Computadora = 3
+Computación.Utensilios = "Aire Comprimido"
+Computación.computadora = 32
+

@@ -36,11 +36,6 @@ def almacenar_ver_tokens(codigo):
             archivo.close()
         except Exception as e:
             print(f"Ocurrió un error al almacenar los tokens en el archivo: {e}")
-    imprimir = input("¿Desea ver los tokens válidos almacenados? (Si/No): ")
-    if imprimir.lower() == "si" or imprimir.lower() == "s":
-        for token in tokensValidos:
-            print(token)
-
 
 def main():
     try:
@@ -55,12 +50,11 @@ def main():
             if not ejecutar_verificador(nombre_archivo):
                 sys.exit(1)
             call_Parse(entrada)
-
     except FileNotFoundError:
         print(f"No se pudo encontrar el archivo '{nombre_archivo}'")
     except Exception as e:
         print(f"Ocurrió un error al analizar el archivo: {e}")
-
+        
 if __name__ == "__main__":
     try:
         main()

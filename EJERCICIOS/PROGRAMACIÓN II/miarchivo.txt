@@ -1,0 +1,3 @@
+Línea1
+Línea2
+clear

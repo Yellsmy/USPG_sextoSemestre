@@ -6,6 +6,7 @@ Integrantes:
 Roberto Alejandro Castillo
 Yellsmy Lilibeth Toj García
 '''
+
 class Pila:
     def __init__(self):
         self.items = []
@@ -70,3 +71,4 @@ def ejecutar_verificador(archivo):
     lista_delimitadores_cierre = []
     verificar_delimitadores(archivo, pila, lista_delimitadores_cierre)
     return imprimir_resultado(pila, lista_delimitadores_cierre)
+

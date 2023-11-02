@@ -1,0 +1,49 @@
+{
+       "clientes": [
+              {
+                     "nombre": "Marta Mónica",
+                     "password": "123",
+                     "cuenta": "12345678",
+                     "tarjeta": "Premium",
+                     "FechaV": "25/12/2022",
+                     "acumulacion": "347",
+                     "estado": "Activa"
+              },
+              {
+                     "nombre": "Mario Esteban",
+                     "password": "321",
+                     "cuenta": "87654321",
+                     "tarjeta": "Platino",
+                     "FechaV": "25/12/2022",
+                     "acumulacion": "3300",
+                     "estado": "Activa"
+              },
+              {
+                     "nombre": "María José",
+                     "password": "000",
+                     "cuenta": "98765432",
+                     "tarjeta": "Premium",
+                     "FechaV": "25/12/2022",
+                     "acumulacion": "24",
+                     "estado": "Activa"
+              },
+              {
+                     "nombre": "Melissa",
+                     "password": "333",
+                     "cuenta": "10293847",
+                     "tarjeta": "Platino",
+                     "FechaV": "25/12/2022",
+                     "acumulacion": "500",
+                     "estado": "Activa"
+              },
+              {
+                     "nombre": "Julio Ramiro",
+                     "password": "111",
+                     "cuenta": "32145678",
+                     "tarjeta": "Premium",
+                     "FechaV": "25/12/2022",
+                     "acumulacion": "3300",
+                     "estado": "Activa"
+              }
+       ]
+}
