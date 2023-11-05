@@ -6,10 +6,11 @@ Integrantes:
 Roberto Alejandro Castillo
 Yellsmy Lilibeth Toj García
 '''
-
+from Errores import LexicalError
 import sys
 import ply.lex as lex
 resultado_lexema = []
+
 
 # Nombres de tokens
 tokens = [
@@ -147,8 +148,9 @@ def t_ID(t):
 
 def t_INVALID_NUMBER(t):
     r"\d+\.\d+\.\d+"
-    print(f"Error: Número inválido '{t.value}'")
-    sys.exit(1)
+    raise LexicalError("Número inválido '%s'" % t.value)
+
+    #sys.exit(2)
     #t.lexer.skip(1)
 
 def t_NUMBER(t):
@@ -181,8 +183,9 @@ t_ignore = " \t"
 
 # Manejo de errores 
 def t_error(t):
-    print("Caracter inválido '%s'" % t.value[0])
-    sys.exit(1)
+    raise LexicalError("Error léxico: Caracter inválido '%s'" % t.value[0])
+
+    #sys.exit(1)
     #t.lexer.skip(1)
 
 def reset_lineno():
@@ -197,14 +200,18 @@ def ejecutar(data):
     lexer.input(data)
 
     resultado_lexema.clear()
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break
-        # print("lexema de "+tok.type+" valor "+tok.value+" linea "tok.lineno)
-        estado = "Tipo {:4} Valor {:16} Linea {:16} Posicion {:4}".format(str(tok.type),str(tok.value) ,str(tok.lineno), str(tok.lexpos) )
-        resultado_lexema.append(estado)
-    return resultado_lexema
+    try:
+        while True:
+            tok = lexer.token()
+            if not tok:
+                break
+            estado = "Tipo {:4} Valor {:16} Linea {:16} Posicion {:4}".format(str(tok.type), str(tok.value), str(tok.lineno), str(tok.lexpos))
+            resultado_lexema.append(estado)
+        return resultado_lexema
+    except LexicalError as e:
+        resultado_lexema.clear()
+        #return e
+        print(str(e))
 
 def tokenize():
     data = """

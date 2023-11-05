@@ -8,6 +8,7 @@ Yellsmy Lilibeth Toj García
 '''
 
 import ply.yacc as yacc
+from Errores import LexicalError
 from analizadorLexico import tokens, lexer
 
 
@@ -290,8 +291,7 @@ def p_empty(p):
 # Función de manejo de errores
 def p_error(p):
     if p:
-        print(f"Sintaxis incorrecta en la línea {p.lexer.lineno}: antes del token '{p.value}'")
-
+        raise LexicalError("Error Sintáctico: Caracter inválido en la línea {} antes del token {}".format(p.lexer.lineno, p.value))
 
 #--------------- Construcción del analizador sintáctico -------------------#
 
@@ -313,12 +313,16 @@ def print_ast(node, level=0):
 
 
 def call_Parse(source_code):
-    result = parser.parse(source_code, lexer=lexer)
-    if result is not None:
-        print("Análisis sintáctico exitoso")
-        print_ast(result)
-    else:
-        print("Error de análisis sintáctico")
+    try:
+        result = parser.parse(source_code, lexer=lexer)
+        if result is not None:
+            print("Análisis sintáctico exitoso")
+            #print_ast(result)
+        else:
+            print("Error de análisis sintáctico")
+        return result
+    except LexicalError as e:
+        print(str(e))
         
 
 # Datos para prueba individual
