@@ -148,7 +148,8 @@ def t_ID(t):
 
 def t_INVALID_NUMBER(t):
     r"\d+\.\d+\.\d+"
-    raise LexicalError("Número inválido '%s'" % t.value)
+    raise LexicalError("Número inválido '{}' en la línea '{}'".format(t.value, t.lineno))
+
 
     #sys.exit(2)
     #t.lexer.skip(1)
@@ -210,8 +211,12 @@ def ejecutar(data):
         return resultado_lexema
     except LexicalError as e:
         resultado_lexema.clear()
+        raise e
         #return e
-        print(str(e))
+        #print(str(e))
+
+reset_lineno()
+
 
 def tokenize():
     data = """

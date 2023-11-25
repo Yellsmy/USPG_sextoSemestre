@@ -6,7 +6,6 @@ Integrantes:
 Roberto Alejandro Castillo
 Yellsmy Lilibeth Toj García
 '''
-
 import ply.yacc as yacc
 from Errores import LexicalError
 from analizadorLexico import tokens, lexer
@@ -48,6 +47,8 @@ def p_class_body(p):
     p[0] = ("body: ", p[1:])
     
 
+
+
 # Reglas de producción para el método main
 def p_main(p):
     ''' main : PUBLIC STATIC VOID MAIN LPAREN STRING LBRACKET RBRACKET ARGS RPAREN LBRACE statements RBRACE  '''
@@ -58,10 +59,14 @@ def p_main(p):
 
 # Reglas de producción para sentencias
 def p_statement(p):
-    '''statement : assignment
+    '''statement : empty
+                | assignment
                 | array_usage
+                | array_dcl
+                | array_assignment
                 | print_statement
                 | dcl_variable SEMI
+                | dcl_variable_with_init SEMI
                 | for_statement
                 | if_statement'''
     
@@ -75,31 +80,34 @@ def p_expression(p):
     """
     expression : ID
                | NUMBER
+               | STRING_LITERAL
                | NOT expression
     """
     
-    if len(p) == 4:
-        p[0] = (p[1], p[2], p[3])
-    else:
-        p[0] = (p[1])
+    p[0] = p[1]
     #print("expression: ", p[0])
     
 
 
 # Reglas de producción para condiciones
 def p_condicion(p):
-    ''' condicion : ID EQ NUMBER
+    ''' condicion :
+               | NUMBER EQ NUMBER
+               | NUMBER GT NUMBER
+               | NUMBER GE NUMBER
+               | NUMBER LE NUMBER
+               | NUMBER LT NUMBER '''
+    
+    p[0] = ("condicion", p[1], p[2], p[3])
+    
+def p_condicion_var(p):
+    ''' condicion_var : ID EQ NUMBER
                | ID GT NUMBER
                | ID GE NUMBER
                | ID LE NUMBER
                | ID LT NUMBER
                | ID AND NUMBER
                | ID OR NUMBER
-               | NUMBER EQ NUMBER
-               | NUMBER GT NUMBER
-               | NUMBER GE NUMBER
-               | NUMBER LE NUMBER
-               | NUMBER LT NUMBER
                | ID AND ID
                | ID OR ID
                | ID EQ ID 
@@ -110,25 +118,46 @@ def p_condicion(p):
                | ID LE propiedades
                | ID LT propiedades '''
     
-    p[0] = ("condicion: ", p[1], p[2], p[3])
-    
+    p[0] = ("condicion_var", p[1], p[3], p.lexer.lineno)
 
+
+def p_condicion_if(p):
+    ''' condicion_if : ID EQ NUMBER
+                | ID GT NUMBER
+                | ID GE NUMBER
+                | ID LE NUMBER
+                | ID LT NUMBER
+                | ID AND NUMBER
+                | ID OR NUMBER
+                | ID AND ID
+                | ID OR ID
+                | ID EQ ID 
+                | ID EQ STRING_LITERAL
+                | ID EQUALS propiedades
+                | ID GT propiedades
+                | ID GE propiedades
+                | ID LE propiedades
+                | ID LT propiedades '''
+    
+    p[0] = ("condicion_if", p[1], p[3], p.lexer.lineno)
 
 # Reglas de producción para incrementos o decrementos
 def p_increment_or_decrement(p):
     ''' increment_or_decrement : ID INCREMENT
                                | ID DECREMENT '''
     
-    p[0] = ("increment or decrement: ", p[1], p[2])
+    p[0] = ("increment or decrement", p[1], p[2], p.lexer.lineno)
     
 
 
-# Reglas de producción para bucles for y for-each 
 def p_for_statement(p):
     ''' for_statement : FOR LPAREN inicializacion SEMI condicion SEMI increment_or_decrement RPAREN LBRACE statements RBRACE
-                      | FOR LPAREN tipo_palabra ID COLON ID RPAREN LBRACE statements RBRACE'''
+                      | FOR LPAREN inicializacion SEMI condicion_var SEMI increment_or_decrement RPAREN LBRACE statements RBRACE
+                      | FOR LPAREN dcl_variable COLON ID RPAREN LBRACE statements RBRACE'''
     
-    p[0] = ("for:", p[1:]) 
+    
+    p[0] = ("for", p[1:], p.lexer.lineno)
+
     #print("for: ", p[0])
     
 
@@ -136,7 +165,7 @@ def p_for_statement(p):
 def p_inicializacion(p):
     ''' inicializacion : INT ID EQUALS NUMBER '''
 
-    p[0] = ("inicialización: ", p[2], p[3], p[4])
+    p[0] = ("inicializacion", p[2], p[3], p[4])
 
 
 # Reglas de producción para sentencias if
@@ -145,9 +174,12 @@ def p_if_statement(p):
     if_statement : IF LPAREN condicion RPAREN LBRACE statements RBRACE
                 | IF LPAREN condicion RPAREN LBRACE statements RBRACE ELSE statements 
                 | IF LPAREN condicion RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+                | IF LPAREN condicion_if RPAREN LBRACE statements RBRACE
+                | IF LPAREN condicion_if RPAREN LBRACE statements RBRACE ELSE statements 
+                | IF LPAREN condicion_if RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     """
     
-    p[0] = ( p[1:]) 
+    p[0] = ('if', p[3]) 
     #print("if_statement: ", p[0])
     
 
@@ -160,7 +192,7 @@ def p_args(p):
     """
     
     if len(p) == 2:
-        p[0] = ["args: ",p[1]]
+        p[0] = [p[1]]
     else:
         p[0] = p[1] + [p[2]]
     
@@ -178,7 +210,7 @@ def p_arg(p):
          | NUMBER COMMA
     """
     
-    p[0] = ("arg: ",p[1])
+    p[0] = (p[1], p.lexer.lineno)
     
 
 
@@ -186,7 +218,7 @@ def p_arg(p):
 def p_propiedades(p):
     ''' propiedades : ID PUNTO ID'''
     
-    p[0] = ("propiedades", p[1], p[3])
+    p[0] = ("propiedades")
     
 
 
@@ -209,29 +241,38 @@ def p_statements(p):
 def p_assignment(p):
     '''assignment : ID EQUALS expression SEMI'''
     
-    p[0] = (p[1], p[2], p[3], p[4])
+    p[0] = ("assignment",p[1], p[3], p.lexer.lineno)
     #print("assignment: ", p[0])
     
 
+def p_suma(p):
+    """
+    suma : NUMBER PLUS NUMBER
+    """
+    p[0]=p[1]+p[3]
 
 # Reglas de producción de declaración e inicialización de variables:
 #- Declaración de variales que contengan números
 #- Declaración de variables que contengan cadena
 #- Declaración de variables que contengan valor booleano
 def p_dcl_variable(p):
-    '''dcl_variable : tipo_number ID EQUALS NUMBER
-                    | tipo_palabra ID EQUALS STRING_LITERAL
-                    | tipo_booleano ID EQUALS valor_boolean
-                    | tipo_number ID
+    '''dcl_variable : tipo_number ID
                     | tipo_palabra ID
-                    | tipo_booleano ID '''
+                    | tipo_booleano ID 
+                     '''
     
-    if len(p) == 5:
-        p[0] = (p[1], p[2], p[4]) 
-    else:
-        p[0] = (p[1], p[2]) 
+    p[0] = ('dcl_variable',p[1], p[2], p.lexer.lineno) 
     #print("dcl_variable: ", p[0])
     
+
+def p_dcl_variable_with_init(p):
+    '''dcl_variable_with_init : tipo_number ID EQUALS NUMBER 
+                    | tipo_palabra ID EQUALS STRING_LITERAL
+                    | tipo_booleano ID EQUALS valor_boolean
+                    | tipo_number ID EQUALS suma
+                    '''
+    p[0] = ('dcl_variable_with_init', p[1], p[2], p[4], p.lexer.lineno)
+
 
 
 # Reglas de producción de tipo_booleano
@@ -246,7 +287,7 @@ def p_tipo_number(p):
     '''tipo_number : INT
                     | DOUBLE'''
     
-    p[0] = ("type_number: : ", p[1])
+    p[0] = ("type_number", p[1])
     
 
 # Reglas de producción de tipo_booleano
@@ -261,7 +302,7 @@ def p_valor_boolean(p):
     '''valor_boolean : TRUE
                     | FALSE'''
     
-    p[0] = ("boolean: ", p[1])
+    p[0] = (p[1])
     
 
 # Reglas de producción de creación de listas
@@ -269,18 +310,32 @@ def p_array_usage(p):
     '''array_usage : tipo_number LBRACKET RBRACKET ID EQUALS LBRACE args RBRACE SEMI
                     | tipo_palabra LBRACKET RBRACKET ID EQUALS LBRACE args RBRACE SEMI'''
     
-    p[0] = ( "array_usage", p[1:])
+    p[0] = ( "array_usage", p[1],p[4],p[7], p.lexer.lineno)
     #print("array: ", p[0])
     
+def p_array_dcl(p):
+    '''array_dcl : tipo_number LBRACKET RBRACKET ID SEMI
+                 | tipo_palabra LBRACKET RBRACKET ID SEMI'''
+    
+    p[0] = ( "array_dcl", p[1],p[4], p.lexer.lineno)
+
+def p_array_assignment(p):
+    '''array_assignment : ID EQUALS LBRACE args RBRACE SEMI'''
+    
+    p[0] = ( "array_assignment", p[1],p[4], p.lexer.lineno)
 
 # Reglas de producción de impresión
 def p_print_statement(p):
-    '''print_statement : SYSTEM PUNTO OUT PUNTO PRINTLN LPAREN STRING_LITERAL RPAREN SEMI
-                       | SYSTEM PUNTO OUT PUNTO PRINTLN LPAREN ID RPAREN SEMI
-                       | SYSTEM PUNTO OUT PUNTO PRINTLN LPAREN ID LBRACKET ID RBRACKET RPAREN SEMI'''
-    
-    p[0] = ('print_statement', p[7])
-    #print("print: ", p[0])
+  '''print_statement : SYSTEM PUNTO OUT PUNTO PRINTLN LPAREN STRING_LITERAL RPAREN SEMI
+                    | SYSTEM PUNTO OUT PUNTO PRINTLN LPAREN ID RPAREN SEMI
+                    | SYSTEM PUNTO OUT PUNTO PRINTLN LPAREN ID LBRACKET ID RBRACKET RPAREN SEMI'''
+
+  if p[2] == "STRING_LITERAL":
+        p[0] = 'print'
+  elif len(p) == 9:
+        p[0] = ('print_elemento', p[7], p.lexer.lineno)  # Caso de imprimir un elemento de una lista o arreglo
+  else:
+        p[0] =  ('print_lista', p[7], p[9], p.lexer.lineno) 
     
 
 # Vacío
@@ -313,16 +368,18 @@ def print_ast(node, level=0):
 
 
 def call_Parse(source_code):
+    lexer.lineno = 1
     try:
         result = parser.parse(source_code, lexer=lexer)
         if result is not None:
             print("Análisis sintáctico exitoso")
-            #print_ast(result)
+            print_ast(result)
         else:
             print("Error de análisis sintáctico")
         return result
     except LexicalError as e:
-        print(str(e))
+        raise e
+        #print(str(e))
         
 
 # Datos para prueba individual
@@ -366,4 +423,4 @@ class HelloWorld {
 }
 """
 
-#call_Parse(data)
+call_Parse(data)
